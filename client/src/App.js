@@ -30,6 +30,24 @@ function App() {
     return data.todo
   }
 
+  const addTodo = async (todo) => {
+    const res = await fetch('http://localhost:8080/post', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(todo),
+    })
+
+    const data = await res.json();
+
+    setTodos([...todos, data.todo])
+
+  }
+
+
+
+
   return (
     <div className="app">
       <div className="container">

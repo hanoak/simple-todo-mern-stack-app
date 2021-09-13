@@ -24,6 +24,11 @@ function App() {
     return data.todos;
   }
 
+  const fetchTodo = async (id) => {
+    const res = await fetch(`http://localhost:8080/get/${id}`)
+    const data = await res.json();
+    return data.todo
+  }
 
   return (
     <div className="app">

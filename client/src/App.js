@@ -45,15 +45,48 @@ function App() {
 
   }
 
+  const removeTodo = async (id) => {
+    const res = await fetch(`http://localhost:8080/delete/${id}`, {
+      method: 'DELETE',
+    });
 
+    res.status === 200
+      ? setTodos(todos.filter((todo) => todo.id !== id))
+      : alert('There was an error while deleting');
+  }
 
+  const markTodo = async (id) => {
+    const todoToToggle = await fetchTodo(id);
+    const updatedTodo = { status: !todoToToggle.status }
+
+    const res = await fetch(`http://localhost:8080/put/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(updatedTodo),
+    });
+
+	if(res.status === 200) {
+
+		const data = await res.json();
+
+		setTodos(
+		  todos.map((todo) =>
+			todo.id === id ? { ...todo, status: data.todo.status } : todo
+		  )
+		)
+
+	}
+
+  }
 
   return (
     <div className="app">
       <div className="container">
 	  	<Header />		
 		<AddToDo addTodo={addTodo}/>
-		{todos.length > 0 ? (<Todos todos={todos} />) : ('No Todos To Show')}		
+		{todos.length > 0 ? (<Todos todos={todos} removeTodo={removeTodo} markTodo={markTodo} />) : ('No Todos To Show')}		
       </div>
     </div>
   );

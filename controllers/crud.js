@@ -45,3 +45,33 @@ exports.getSingleTodo = (req, res, next) => {
         }
     });
 };
+
+exports.postTodo = (req, res, next) => {
+
+    const errors = validationResult(req);
+
+    if(! errors.isEmpty()) {
+        const error = new Error('Validation failed, provided data is incorrect.');
+        error.statusCode = 422;
+        next(error);
+    }
+
+    const todo = new Todo({
+        name: req.body.name,
+        status: req.body.status
+    });
+
+    todo.save()
+        .then(todo => {
+            res.status(201).json({
+                message: 'Todo successfully created!',
+                todo: { name: todo.name, status: todo.status, id: todo._id.toString()}
+            });
+        })
+        .catch(err => {
+            if(! err.statusCode) {
+                err.statusCode = 500;
+                next(err);
+            }
+        });
+};

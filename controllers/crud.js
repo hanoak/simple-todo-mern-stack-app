@@ -75,3 +75,43 @@ exports.postTodo = (req, res, next) => {
             }
         });
 };
+
+exports.putTodo = (req, res, next) => {
+
+    const errors = validationResult(req);
+
+    if(! errors.isEmpty()) {
+        const error = new Error('Validation failed, provided data is incorrect.');
+        error.statusCode = 422;
+        next(error);
+    }
+
+    const tid = req.params.tid;
+
+    Todo.findById(tid)
+        .then(todo => {
+
+            if(! todo) {
+                const error = new Error('Could not find todo.');
+                error.statusCode = 404;
+                next(error);
+            }
+
+            todo.status = req.body.status;
+
+            return todo.save();
+
+        })
+        .then(todo => {
+            res.status(200).json({ 
+                message: 'Todo updated!', 
+                todo: { name: todo.name, status: todo.status, id: todo._id.toString()} 
+            });
+        })
+        .catch(err => {
+            if(! err.statusCode) {
+                err.statusCode = 500;
+                next(err);
+            }
+        });
+};

@@ -115,3 +115,28 @@ exports.putTodo = (req, res, next) => {
             }
         });
 };
+
+exports.deleteTodo = (req, res, next) => {
+
+    const tid = req.params.tid;
+    Todo.findById(tid)
+    .then(todo => {
+
+        if(! todo) {
+            const error = new Error('Could not find todo.');
+            error.statusCode = 404;
+            next(error);
+        }
+
+        return Todo.findByIdAndRemove(tid);
+    })
+    .then(result => {
+        res.status(200).json({ message: 'Todo deleted.' });
+    })
+    .catch(err => {
+        if(! err.statusCode) {
+            err.statusCode = 500;
+            next(err);
+        }
+    });
+};

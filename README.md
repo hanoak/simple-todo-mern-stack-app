@@ -4,9 +4,11 @@
 # A MERN stack app(Todo app) with React.js + node.js + express.js + mongodb with REST API
 
   
-***FRONTEND - React.js***
-***BACKEND - Node.js + express.js***
-***DATABASE - MongoDB (Atlas)***
+
+
+###  Front-End - React.js
+
+###  Back-End - Node.js, Express.js & MongoDB Atlas
 
 🖐 Hi there,  It's a full-stack app built in React.js for the frontend and Node.js for the backend. And I've used Mongodb's atlas as a cloud service provider to store data. This app is a simple TODO APP, this is just to showcase the basic working of a Full-stack application built in MERN. This app includes all the CRUD operations performed via exposed APIs. Please free to go through this code and enjoy!
 

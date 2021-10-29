@@ -10,9 +10,7 @@
 
 ###  Back-End - Node.js, Express.js & MongoDB Atlas
 
-🖐 Hi there,  It's a full-stack app built in React.js for the frontend and Node.js for the backend. And I've used Mongodb's atlas as a cloud service provider to store data. This app is a simple TODO APP, this is just to showcase the basic working of a Full-stack application built in MERN. This app includes all the CRUD operations performed via exposed APIs. Please free to go through this code and enjoy!
-
-Feel free to use this code and work around it. Hope you got the insights
+🖐 Hi there,  It's a full-stack app built in React.js for the frontend and Node.js for the backend. And I've used Mongodb's atlas as a cloud service provider to store data. This app is a simple TODO APP, this is just to showcase the basic working of a Full-stack application built in MERN. This app includes all the CRUD operations performed via exposed APIs. Please free to go through this code and enjoy! Hope you got the insights
 
   ## 📦packages used:
 **Frontend -** 
